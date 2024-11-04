@@ -2,7 +2,6 @@ import sys
 sys.path.append("src")
 from LiquidacionNomina import Liquida_nomina
 from controller.UserController import ControladorUsuarios
-
 detalles = {}
 def validate_empty(value):
     return value if value else "0"

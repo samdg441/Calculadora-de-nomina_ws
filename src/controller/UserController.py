@@ -1,11 +1,14 @@
 
 import sys
 sys.path.append( "src" )
+sys.path.append(".")
+
 
 import psycopg2
 from psycopg2 import sql
 from model.Usuario import Usuario
-import SecretConfig
+import controller.SecretConfig
+
 
 class ControladorUsuarios :
 
@@ -53,7 +56,7 @@ class ControladorUsuarios :
 
     def ObtenerCursor():
         """ Crea la conexion a la base de datos y retorna un cursor para hacer consultas """
-        connection = psycopg2.connect(database=SecretConfig.PGDATABASE, user=SecretConfig.PGUSER, password=SecretConfig.PGPASSWORD, host=SecretConfig.PGHOST, port=SecretConfig.PGPORT)
+        connection = psycopg2.connect(database=controller.SecretConfig.PGDATABASE, user=controller.SecretConfig.PGUSER, password=controller.SecretConfig.PGPASSWORD, host=controller.SecretConfig.PGHOST, port=controller.SecretConfig.PGPORT)
         # Todas las instrucciones se ejecutan a tavés de un cursor
         cursor = connection.cursor()
         return cursor
