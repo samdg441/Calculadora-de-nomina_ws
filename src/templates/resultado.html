@@ -4,38 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado de la Liquidación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
     <style>
+        /* Fondo de la página */
         body {
-            background-color: #f5f5dc;
+            background-image: url("{{ url_for('static', filename='Fondo3.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            font-family: Arial, sans-serif;
         }
-        .container {
-            width: 500px;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+        /* Contenedor del resultado */
+        .result-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        /* Tabla de resultados */
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             padding: 10px;
             border: 1px solid #ccc;
+            text-align: left;
         }
         th {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #30363D;
+            color: #c4c8d1;
+        }
+        /* Botón de regresar */
+        a.button {
+            display: inline-block;
+            width: 100%;
+            background-color: #30363D;
+            color: #c4c8d1;
+            font-size: 16px;
+            padding: 10px 0;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        a.button:hover {
+            background-color: #2a3138;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="result-container">
         <h2>Resultado de la Liquidación de Nómina</h2>
         <table>
             <thead>
@@ -57,7 +91,9 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ url_for('inicio') }}">Volver a la Página Principal</a>
+        <!-- Botón de regreso a la página principal -->
+        <a href="{{ url_for('inicio') }}" class="button">Volver a la Página Principal</a>
     </div>
 </body>
 </html>
+

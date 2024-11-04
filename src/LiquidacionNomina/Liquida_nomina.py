@@ -1,6 +1,6 @@
 import sys
-import re
-sys.path.append("src/LiquidacionNomina")
+sys.path.append( "src" )
+sys.path.append(".")
 from LiquidacionNomina import Validations
 
 class Liquidacion():

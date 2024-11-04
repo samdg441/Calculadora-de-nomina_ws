@@ -1,5 +1,8 @@
+import sys
+sys.path.append( "src" )
+sys.path.append(".")
 from flask import Flask, render_template, request, redirect, url_for
-from LiquidacionNomina import Liquida_nomina  # Asegúrate de que esta ruta sea correcta
+from LiquidacionNomina.Liquida_nomina import Liquidacion  # Asegúrate de que esta ruta sea correcta
 
 app = app = Flask(__name__)
 
@@ -33,7 +36,7 @@ def calcular_liquidacion():
     sick_days = int(request.form.get('sick_days', 0))
 
     # Crear instancia de Liquidacion y calcular
-    liquidacion = Liquida_nomina(
+    liquidacion = Liquidacion(
         monthly_salary, weeks_worked, time_worked_on_holidays,
         overtime_day_hours, overtime_night_hours, overtime_holiday_hours,
         leave_days, sick_days
@@ -46,3 +49,8 @@ def calcular_liquidacion():
 if __name__ == '__main__':
     app.run(debug=True)
 
+from LiquidacionNomina import Liquida_nomina
+
+# Intenta instanciar la clase para ver si el error persiste.
+liquidacion = Liquidacion(1000, 4, 10, 5, 3, 2, 1, 1)
+print(liquidacion)

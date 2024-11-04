@@ -3,14 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcular Liquidación de Nómina</title> <!-- Título específico para esta página -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}"> <!-- Conexión a tu archivo CSS principal -->
+    <title>Calcular Nómina - Reservas Universidad</title>
+    <!-- Enlace al CSS en la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
+    <style>
+        /* Estilos adicionales para asegurar que el fondo se aplique */
+        body {
+            background-image: url("{{ url_for('static', filename='Fondo3.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        /* Ajustes específicos del formulario */
+        .form-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px; /* Ancho máximo del formulario */
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        /* Estilos para los elementos del formulario */
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #30363D;
+            color: #c4c8d1;
+            font-size: 16px;
+            padding: 10px 0;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2a3138;
+        }
+    </style>
 </head>
 <body>
-    <!-- Contenedor principal centrado con imagen de fondo -->
-    <div class="container">
-        <h2>Ingrese sus datos de nómina</h2>
-        <form action="{{ url_for('static', filename='fondo2.jpg') }}" method="post">
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <!-- Enlace a la imagen en la carpeta static -->
+                <a href="#inicio"><img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo Universidad"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li>|</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Formulario de nómina -->
+    <div class="form-container">
+        <h2>Ingrese sus Datos de Nómina</h2>
+        <form action="{{ url_for('calcular_liquidacion') }}" method="post">
             <label>Salario Mensual ($COP):</label>
             <input type="number" name="monthly_salary" step="0.01" required>
 
@@ -40,4 +112,3 @@
     </div>
 </body>
 </html>
-
