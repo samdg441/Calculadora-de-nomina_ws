@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Liquidación de Nómina</title> <!-- Título específico para esta página -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}"> <!-- Conexión a tu archivo CSS principal -->
+</head>
+<body>
+    <!-- Contenedor principal centrado con imagen de fondo -->
+    <div class="container">
+        <h2>Ingrese sus datos de nómina</h2>
+        <form action="{{ url_for('static', filename='fondo2.jpg') }}" method="post">
+            <label>Salario Mensual ($COP):</label>
+            <input type="number" name="monthly_salary" step="0.01" required>
+
+            <label>Semanas Trabajadas:</label>
+            <input type="number" name="weeks_worked" required>
+
+            <label>Horas Trabajadas en Festivos:</label>
+            <input type="number" name="time_worked_on_holidays" step="0.01">
+
+            <label>Horas Extras Diurnas:</label>
+            <input type="number" name="overtime_day_hours" step="0.01">
+
+            <label>Horas Extras Nocturnas:</label>
+            <input type="number" name="overtime_night_hours" step="0.01">
+
+            <label>Horas Extras en Festivos:</label>
+            <input type="number" name="overtime_holiday_hours" step="0.01">
+
+            <label>Días de Licencia:</label>
+            <input type="number" name="leave_days">
+
+            <label>Días de Incapacidad:</label>
+            <input type="number" name="sick_days">
+
+            <button type="submit">Calcular</button>
+        </form>
+    </div>
+</body>
+</html>
+

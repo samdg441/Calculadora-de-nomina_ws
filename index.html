@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal - Reservas Universidad</title>
+    <!-- Enlace al CSS en la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <!-- Enlace a la imagen en la carpeta static -->
+                <a href="#inicio"><img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo Universidad"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li>|</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Imagen Hero -->
+    <div class="hero-section" id="inicio">
+        <div class="hero-image">
+            <!-- Enlace a la imagen principal en la carpeta static -->
+            <img src="{{ url_for('static', filename='Img.jpeg') }}" alt="Imagen Principal" class="hero-img">
+            <div class="hero-content">
+                <h1>¡Bienvenidos!</h1>
+                <p>Calcula tu nómina de manera fácil y rápida.</p>
+                <a href="{{ url_for('entrada_datos') }}"><button>Calcular Nómina</button></a>
+                <a href="{{ url_for('buscar') }}"><button>Observar Base de Datos</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="nosotros-section">
+        <div class="container">
+            <h2>¿Quiénes Somos?</h2>
+            <p>Somos una plataforma dedicada a simplificar el cálculo de nómina para empresas y empleados. Nuestra herramienta en línea permite realizar cálculos precisos y eficientes, asegurando el cumplimiento de la normativa laboral. Nos apasiona brindar transparencia y confianza en cada transacción, ayudando a nuestros usuarios a gestionar sus pagos de manera efectiva y segura.</p>
+
+            <div class="nosotros-banderines">
+                <div class="banderin">
+                    <h3>Nuestra Misión</h3>
+                    <p>Proporcionar una herramienta confiable y fácil de usar para el cálculo de nómina, que permita a empresas y empleados gestionar sus pagos de manera precisa y eficiente, garantizando transparencia y cumplimiento normativo.</p>
+                </div>
+
+                <div class="banderin">
+                    <h3>Nuestra Visión</h3>
+                    <p>Convertirnos en la plataforma líder en cálculo de nómina en línea, reconocida por nuestra innovación, precisión y compromiso con el bienestar financiero de nuestros usuarios.</p>
+                </div>
+
+                <div class="banderin">
+                    <h3>Nuestros Valores</h3>
+                    <ul>
+                        <li>Precisión</li>
+                        <li>Confianza</li>
+                        <li>Accesibilidad</li>
+                        <li>Transparencia</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de pie de página -->
+    <footer id="fin" class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 Reservas Universidad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,325 @@
+/* Estilo General */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    margin: 0; /* Eliminar todos los márgenes */
+    padding: 0;
+    /* margin-top: 80px; */ /* Eliminar el margen superior */
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave al hacer clic en enlaces */
+}
+
+/* Encabezado */
+header {
+    display: flex;
+    justify-content: center; /* Centra el contenido del header */
+    align-items: center;
+    padding: 5px 20px; /* Reducir el padding para hacer el header menos alto */
+    background-color: #000000;
+    border: 2px solid #0a0a0a;
+    border-radius: 0 0 30px 30px;
+    margin: 0 20px; /* Agregar margen a los lados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Hacer el header fijo */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar elementos en el contenedor */
+    width: 100%;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en múltiples líneas */
+}
+
+.logo img {
+    width: 220px;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none; /* Quitar estilo de lista */
+    padding: 0;
+    display: flex; /* Usar flexbox para disposición horizontal */
+    margin: 0; /* Sin margen */
+}
+
+nav ul li {
+    margin: 0 10px; /* Espaciado entre elementos */
+}
+
+nav ul li a {
+    color: #fdf8f8;
+    text-decoration: none;
+    padding: 10px 15px; /* Espaciado interno */
+    transition: color 0.3s; /* Cambiar la transición solo al color */
+}
+
+nav ul li a:hover {
+    color: hwb(0 0% 100%); /* Color al pasar el ratón */
+    background-color: #ffffff; /* Fondo al pasar el ratón */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    margin-top: 0; /* Sin margen superior para que la imagen esté en la parte superior */
+    min-height: 100vh; /* Asegura que la sección ocupe toda la altura de la ventana */
+    margin-bottom: 0; /* Elimina el margen inferior */
+}
+
+.hero-image {
+    position: relative;
+    overflow: hidden; /* Asegúrate de que no haya desbordamiento */
+    height: calc(100vh + 2cm); /* Ajustar la altura de la imagen */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Efecto Media Luna */
+.hero-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%; /* Mantén la altura para el efecto */
+    background: #F5F6F2;
+    clip-path: ellipse(15% 35% at 50% 100%); /* Ajustar para un efecto más sutil */
+}
+
+/* Contenido de la imagen */
+.hero-content {
+    position: absolute;
+    top: 50%; /* Ajusta esta propiedad para centrar verticalmente el contenido */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado horizontal y vertical */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-content h1 {
+    color: #000000;
+}
+
+.hero-content p {
+    margin-bottom: 20px;
+}
+
+/* Botones CTA */
+.cta-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones CTA */
+    gap: 10px; /* Espacio entre botones */
+}
+
+.cta-btn {
+    background-color: #ffffff;
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+}
+/* Botón de Reservar */
+.login-btn {
+    background-color: #ffffff; /* Color de fondo del botón */
+    color: #F5F6F2; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave al cambiar color */
+}
+
+.login-btn:hover {
+    background-color: #F5F6F2; /* Cambiar fondo al pasar el ratón */
+    color: #ffffff; /* Cambiar texto al pasar el ratón */
+}
+
+
+
+.register-btn:hover {
+    background-color: #F5F6F2; /* Cambiar fondo al pasar el ratón */
+    color: #ffffff; /* Cambiar texto al pasar el ratón */
+}
+
+/* Sección Nosotros */
+.nosotros-section {
+    background-color: #f5f6f2; /* Color de fondo más suave */
+    padding: 40px 20px; /* Espaciado vertical reducido */
+    text-align: center; /* Centrar texto */
+    border-top: 5px solid #000000; /* Línea superior para destacar la sección */
+    padding: 65px 0; /* Ajusta el padding como desees */
+    margin-top: 0; /* Asegúrate de que no haya márgenes superiores que empujen la sección */
+}
+
+.nosotros-section .container {
+    display: flex;
+    flex-direction: column; /* Colocar elementos en columna */
+    align-items: center; /* Centrar elementos */
+}
+
+/* Estilo del título */
+.nosotros-section h2 {
+    font-size: 2rem; /* Tamaño de fuente más pequeño */
+    color: #0c0c0c; /* Color del título */
+    margin-bottom: 15px; /* Espaciado inferior reducido */
+}
+
+/* Estilo del párrafo introductorio */
+.nosotros-section p {
+    max-width: 800px; /* Ancho máximo para el párrafo */
+    line-height: 1.5; /* Espaciado entre líneas reducido */
+    margin-bottom: 30px; /* Espaciado inferior reducido */
+    color: #555; /* Color del texto */
+}
+
+/* Contenedor de banderines */
+.nosotros-banderines {
+    display: flex; /* Usar flexbox para organizar banderines en fila */
+    justify-content: center; /* Centrar los banderines */
+    flex-wrap: wrap; /* Permitir que se ajusten si no caben en una sola fila */
+    gap: 20px; /* Espacio entre banderines reducido */
+    max-width: 1200px; /* Ancho máximo para el contenedor */
+    margin: 0 auto; /* Centrar contenedor */
+}
+
+/* Banderines */
+.banderin {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 15px; /* Espaciado reducido */
+    width: 280px; /* Ancho fijo para los banderines */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transición para efecto hover */
+}
+
+/* Efecto hover en banderines */
+.banderin:hover {
+    transform: translateY(-5px); /* Levantar el banderín al pasar el cursor */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+/* Título del banderín */
+.banderin h3 {
+    color: #000000; /* Color del título */
+    font-size: 1.3rem; /* Tamaño de fuente ajustado */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Texto dentro del banderín */
+.banderin p, .banderin ul {
+    color: #555; /* Color del texto */
+    font-size: 0.9rem; /* Tamaño de fuente ajustado */
+}
+
+/* Ajustar lista dentro de banderín */
+.banderin ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+.banderin ul li {
+    margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+}
+
+
+
+
+
+/* Figuras decorativas en el fondo */
+.como-funciona-section::before,
+.como-funciona-section::after {
+    content: "";
+    position: absolute; /* Posición absoluta para las figuras */
+    z-index: 0; /* Asegura que las figuras estén detrás del contenido */
+}
+
+/* Círculos decorativos a la izquierda */
+.como-funciona-section::before {
+    width: 100px; /* Ancho del círculo */
+    height: 100px; /* Altura del círculo */
+    background-color: rgba(0, 0, 0, 0.3); /* Color rojo suave */
+    border-radius: 50%; /* Círculo completo */
+    top: 10%; /* Posición en el fondo */
+    left: -50px; /* Posición fuera del contenedor */
+    box-shadow: 0 4px 10px rgba(19, 18, 18, 0.2); /* Sombra suave */
+}
+
+/* Círculos decorativos a la derecha */
+.como-funciona-section::after {
+    width: 100px; /* Ancho del círculo */
+    height: 100px; /* Altura del círculo */
+    background-color: rgba(14, 13, 13, 0.3); /* Color rojo suave */
+    border-radius: 50%; /* Círculo completo */
+    bottom: 10%; /* Posición en el fondo */
+    right: -50px; /* Posición fuera del contenedor */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+
+
+
+/* Divisor de Secciones */
+.divider {
+    width: 80%; /* Ancho del divisor */
+    height: 2px; /* Altura del divisor reducido */
+    background: #070707; /* Color del divisor */
+    margin: 15px auto; /* Centrar el divisor */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Contenido principal */
+.content {
+    display: flex; /* Usar flexbox para organizar video y pasos en fila */
+    justify-content: space-between; /* Espacio entre video y pasos */
+    align-items: flex-start; /* Alinear contenido al inicio */
+    gap: 20px; /* Espacio entre video y pasos */
+    flex-wrap: wrap; /* Permitir que el contenido se ajuste si es necesario */
+}
+
+
+
+/* Ajustes responsivos para pantallas más pequeñas */
+@media (max-width: 1000px) {
+    .contacto-mapa-contenedor {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
+/* Botones en la sección Hero */
+.hero-content button {
+    display: block; /* Coloca cada botón en una línea nueva */
+    width: 100%; /* Asegura que ocupen todo el ancho del contenedor */
+    background-color: #30363D; /* Color de fondo blanco */
+    color: #c4c8d1; /* Color de texto */
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    padding: 10px 0; /* Espaciado interno */
+    margin: 10px 0; /* Espacio entre botones */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+.hero-content button:hover {
+    background-color: #f5f5f5; /* Color ligeramente más oscuro al pasar el ratón */
+}

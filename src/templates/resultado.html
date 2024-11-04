@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de la Liquidación</title>
+    <style>
+        body {
+            background-color: #f5f5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado de la Liquidación de Nómina</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor ($COP)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for concepto, valor in detalles.items() %}
+                <tr>
+                    <td>{{ concepto }}</td>
+                    <td>{{ valor | round(2) }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th>Total</th>
+                    <th>{{ total | round(2) }}</th>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{{ url_for('inicio') }}">Volver a la Página Principal</a>
+    </div>
+</body>
+</html>
