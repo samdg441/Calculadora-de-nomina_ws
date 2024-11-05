@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda en la Base de Datos - Reservas Universidad</title>
+    <!-- Enlace al CSS en la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <!-- Enlace a la imagen en la carpeta static -->
+                <a href="{{ url_for('inicio') }}"><img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo Universidad"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li>|</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección de acciones en la base de datos -->
+    <div class="database-actions-section" id="acciones">
+        <div class="container">
+            <h2>Gestión de la Base de Datos</h2>
+            <p>Seleccione una de las opciones para interactuar con la base de datos de nómina.</p>
+            <div class="action-buttons">
+                <a href="{{ url_for('mostrar') }}"><button>Mostrar</button></a>
+                <a href="{{ url_for('agregar') }}"><button>Agregar</button></a>
+                <a href="{{ url_for('encontrar') }}"><button>Buscar</button></a>
+                <a href="{{ url_for('eliminar') }}"><button>Eliminar</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de pie de página -->
+    <footer id="fin" class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 Reservas Universidad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <style>
+        /* Estilos adicionales */
+        body {
+            background-image: url("{{ url_for('static', filename='Fondo3.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .database-actions-section {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto; /* Margen superior e inferior */
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 250px; /* Ajusta este valor para más espacio debajo del header */
+        }
+        .database-actions-section h2 {
+            margin-bottom: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            width: 120px;
+            padding: 10px;
+            background-color: #30363D;
+            color: #c4c8d1;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 0 10px; /* Espacio entre botones */
+        }
+        .action-buttons button:hover {
+            background-color: #2a3138;
+        }
+    </style>
+    
+
+</body>
+</html>

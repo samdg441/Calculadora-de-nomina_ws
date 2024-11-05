@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Usuarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='Fondo3.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+
+        header .container {
+            margin-bottom: 40px; /* Agrega espacio debajo del encabezado */
+        }
+
+        header {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 200px; /* Espacio adicional encima de la tabla */
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #30363D;
+            color: #c4c8d1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="{{ url_for('inicio') }}"><img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo Universidad"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Lista de Todos los Usuarios</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.cedula }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.correo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer id="fin" class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 Reservas Universidad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

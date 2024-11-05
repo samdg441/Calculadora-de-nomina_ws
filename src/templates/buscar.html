@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Usuario - Reservas Universidad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_principal.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='Fondo3.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            margin-top: 180px;
+        }
+
+        label, input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #30363D;
+            color: #c4c8d1;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 120px;
+            font-size: 18px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="{{ url_for('inicio') }}"><img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo Universidad"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li>|</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container form-container">
+        <div>
+        <h2>Buscar Usuario por Cédula</h2>
+        <div>
+        </div>
+        <form action="{{ url_for('buscar_usuario') }}" method="POST">
+            <label for="cedula">Cédula:</label>
+            <input type="text" id="cedula" name="cedula" required>
+            <input type="submit" value="Buscar">
+        </form>
+
+        {% if usuario %}
+        <div class="result">
+            <h3>Resultado de la Búsqueda:</h3>
+            <p><strong>Cédula:</strong> {{ usuario.cedula }}</p>
+            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+            <p><strong>Apellido:</strong> {{ usuario.apellido }}</p>
+            <p><strong>Correo:</strong> {{ usuario.correo }}</p>
+        </div>
+        {% elif usuario is not none %}
+        <div class="result error">
+            <p>No se encontró ningún usuario con esa cédula.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer id="fin" class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 Reservas Universidad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

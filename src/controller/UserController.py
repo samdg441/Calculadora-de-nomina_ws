@@ -1,8 +1,6 @@
-
 import sys
-sys.path.append( "src" )
+sys.path.append("src")
 sys.path.append(".")
-
 
 import psycopg2
 from psycopg2 import sql
@@ -10,96 +8,112 @@ from model.Usuario import Usuario
 import controller.SecretConfig
 
 
-class ControladorUsuarios :
+class ControladorUsuarios:
 
-    def CrearTabla():
-        """ Crea la tabla de usuario en la BD """
-        cursor = ControladorUsuarios.ObtenerCursor()
-
-        cursor.execute("""create table usuarios (
-            cedula integer  NOT NULL,
-            nombre text not null,
-            apellido text not null,
-            correo text,
-            contrasena text,
-            primary key (cedula)
-            ); """)
-        cursor.connection.commit()
-
-    def EliminarTabla():
-        """ Borra la tabla de usuarios de la BD """
-        cursor = ControladorUsuarios.ObtenerCursor()
-
-        cursor.execute("""drop table usuarios""" )
-        # Confirma los cambios realizados en la base de datos
-        # Si no se llama, los cambios no quedan aplicados
-        cursor.connection.commit()
-
-
-    def InsertarUsuario( usuario : Usuario ):
-        """ Recibe un a instancia de la clase Usuario y la inserta en la tabla respectiva"""
-        cursor = ControladorUsuarios.ObtenerCursor()
-        cursor.execute( f"""insert into usuarios (cedula, nombre, apellido, correo, contrasena) 
-                        values ('{usuario.cedula}', '{usuario.nombre}', '{usuario.apellido}', '{usuario.correo}', '{usuario.contrasena}')""" )
-
-        cursor.connection.commit()
-
-    def BuscarUsuarioCedula( cedula ):
-        """ Trae un usuario de la tabla de usuarios por la cedula """
-        cursor = ControladorUsuarios.ObtenerCursor()
-
-        cursor.execute(f"""select cedula, nombre, apellido, correo, contrasena
-        from usuarios where cedula = {cedula}""" )
-        fila = cursor.fetchone()
-        resultado = Usuario( cedula=fila[0], nombre=fila[1], apellido=fila[2], correo=fila[3] , contrasena=fila[4] )
-        return resultado
-
+    @staticmethod
     def ObtenerCursor():
         """ Crea la conexion a la base de datos y retorna un cursor para hacer consultas """
-        connection = psycopg2.connect(database=controller.SecretConfig.PGDATABASE, user=controller.SecretConfig.PGUSER, password=controller.SecretConfig.PGPASSWORD, host=controller.SecretConfig.PGHOST, port=controller.SecretConfig.PGPORT)
-        # Todas las instrucciones se ejecutan a tavés de un cursor
-        cursor = connection.cursor()
-        return cursor
+        connection = psycopg2.connect(database=controller.SecretConfig.PGDATABASE, 
+                                       user=controller.SecretConfig.PGUSER, 
+                                       password=controller.SecretConfig.PGPASSWORD, 
+                                       host=controller.SecretConfig.PGHOST, 
+                                       port=controller.SecretConfig.PGPORT)
+        return connection.cursor(), connection  # Retorna cursor y conexión
 
-    def RegistrarUsuario(cedula, nombre, apellido, correo, contrasena):
-        usuario:Usuario = Usuario(cedula, nombre, apellido, correo, contrasena)
-        return usuario
-    
-    def IniciarSesion(cedula, contrasena:str):
-        usuario = ControladorUsuarios.BuscarUsuarioCedula(cedula)        
-        if usuario.contrasena == contrasena:
+    @staticmethod
+    def CrearTabla():
+        """ Crea la tabla de usuario en la BD """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
+        cursor.execute("""CREATE TABLE IF NOT EXISTS usuarios (
+            cedula INTEGER NOT NULL,
+            nombre TEXT NOT NULL,
+            apellido TEXT NOT NULL,
+            correo TEXT,
+            contrasena TEXT,
+            PRIMARY KEY (cedula)
+            ); """)
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def EliminarTabla():
+        """ Borra la tabla de usuarios de la BD """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
+        cursor.execute("""DROP TABLE IF EXISTS usuarios;""")
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def InsertarUsuario(usuario: Usuario):
+        """ Recibe una instancia de la clase Usuario y la inserta en la tabla respectiva """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
+        cursor.execute("""INSERT INTO usuarios (cedula, nombre, apellido, correo, contrasena) 
+                          VALUES (%s, %s, %s, %s, %s)""", 
+                       (usuario.cedula, usuario.nombre, usuario.apellido, usuario.correo, usuario.contrasena))
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def BuscarUsuarioCedula(cedula):
+        """ Trae un usuario de la tabla de usuarios por la cedula """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
+        cursor.execute("""SELECT cedula, nombre, apellido, correo, contrasena
+                          FROM usuarios WHERE cedula = %s;""", (cedula,))
+        fila = cursor.fetchone()
+        connection.close()
+        if fila:
+            return Usuario(cedula=fila[0], nombre=fila[1], apellido=fila[2], correo=fila[3], contrasena=fila[4])
+        return None
+
+    @staticmethod
+    def MostrarUsuarios():
+        """ Muestra todos los usuarios en la tabla """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
+        cursor.execute("""SELECT cedula, nombre, apellido, correo,contrasena FROM usuarios;""")
+        filas = cursor.fetchall()
+        connection.close()
+        usuarios = []
+        for fila in filas:
+            usuarios.append(Usuario(cedula=fila[0], nombre=fila[1], apellido=fila[2], correo=fila[3],contrasena=fila[4]))
+        return usuarios
+
+    @staticmethod
+    def IniciarSesion(cedula, contrasena: str):
+        usuario = ControladorUsuarios.BuscarUsuarioCedula(cedula)
+        if usuario and usuario.contrasena == contrasena:
             return True
         return False
 
+    @staticmethod
     def CambiarContrasena(cedula, contrasena, new_contrasena):
         if ControladorUsuarios.IniciarSesion(cedula, contrasena):
-            cursor = ControladorUsuarios.ObtenerCursor()
-            cursor.execute(f"""UPDATE usuarios set contrasena = '{new_contrasena}' WHERE cedula = '{cedula}' """)
-            cursor.connection.commit()
+            cursor, connection = ControladorUsuarios.ObtenerCursor()
+            cursor.execute("""UPDATE usuarios SET contrasena = %s WHERE cedula = %s;""", (new_contrasena, cedula))
+            connection.commit()
+            connection.close()
             return True
-        raise Exception
-        
+        raise Exception("Credenciales incorrectas")
 
+    @staticmethod
     def EliminarCuenta(cedula, contrasena):
         if ControladorUsuarios.IniciarSesion(cedula, contrasena):
-            cursor = ControladorUsuarios.ObtenerCursor()
-            cursor.execute(f"""DELETE FROM usuarios WHERE cedula = '{cedula}' """)
-            cursor.connection.commit()
+            cursor, connection = ControladorUsuarios.ObtenerCursor()
+            cursor.execute("""DELETE FROM usuarios WHERE cedula = %s;""", (cedula,))
+            connection.commit()
+            connection.close()
             return True
+        raise Exception("Credenciales incorrectas")
 
     @staticmethod
     def TablaUsuariosExiste():
-        """Verifica si la tabla 'usuarios' ya existe en la base de datos."""
-        cursor = ControladorUsuarios.ObtenerCursor()
+        """ Verifica si la tabla 'usuarios' ya existe en la base de datos. """
+        cursor, connection = ControladorUsuarios.ObtenerCursor()
         try:
-            query = sql.SQL("""
-                SELECT EXISTS (
-                    SELECT 1 
-                    FROM information_schema.tables 
-                    WHERE table_schema = 'public' 
-                    AND table_name = 'usuarios'
-                );
-            """)
+            query = sql.SQL("""SELECT EXISTS (
+                                SELECT 1 
+                                FROM information_schema.tables 
+                                WHERE table_schema = 'public' 
+                                AND table_name = 'usuarios');""")
             cursor.execute(query)
             existe = cursor.fetchone()[0]
             return existe  # True si la tabla existe, False en caso contrario
@@ -107,4 +121,4 @@ class ControladorUsuarios :
             print(f"Error al verificar la tabla: {e}")
             return False
         finally:
-            cursor.connection.close()
+            connection.close()
