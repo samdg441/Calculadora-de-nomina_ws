@@ -6,6 +6,7 @@
 **Autores de la base de datos**:
 - Felix Prada
 - Dilan Urrego
+##
 **Autores de La Aplicación Web**:
 - Samuel Gallego
 - Isabella Ceballos
