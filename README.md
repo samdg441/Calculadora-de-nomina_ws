@@ -1,67 +1,53 @@
-# Calculadora de Nómina
-## ¿Quién hizo esto?
-**Autores de Calculadora de Nómina**:
-- Steven Oviedo
-- Valentina Morales
-**Autores de la base de datos**:
-- Felix Prada
-- Dilan Urrego
-##
-**Autores de La Aplicación Web**:
-- Samuel Gallego
-- Isabella Ceballos
-  
-## ¿Qué es y para qué es?
-Este proyecto es una aplicación que calcula el total a pagar de una empresa a un empleado (pago de nómina). Este pago corresponde a la diferencia entre los valores devengados y las deducciones de ley que aplican al salario del trabajador.
-## ¿Cómo lo hago funcionar?
-### Prerrequisito
-Asegurese de tener ``Python`` instalado en su sistema. Ademas de también añadir `unittest` que es el encargado de correr las pruebas unitarias, así como también debe añadir `kivy`  que es el encargado de procesar la interfaz de usuario.<br>
-De resto no hay otro prerrequisito.
+# Calculadora de Nómina - Aplicación Web
 
-### Ejecución
-Para correr el programa por fuera del entorno de desarrollo :
-1. Navegar a la carpeta: una vez que hayas clonado el archivo, abre el cmd y navega a la carpeta donde guardaste el archivo, por ejemplo:
-   ```bash
-   cd C:\Users\Usuario\OneDrive\Documentos\U\Sexto Semestre\Código limpio\Clean-Code-1
-   ``` 
-2. A continuación puedes ejecutar la consola para comprobar el funcionamiento, esto mediante las siguinetes lineas: <br>
-   ```bash
-   src\Console\Console.py
-   python src\Console\Console.py
-   ```
-3. Tambien puedes ejecutar el script principal donde se encuentra la interfaz, la cual es mas amigable con el usuario: <br>
-   ```bash
-   src\GUI\Nomina_GUI.py
-   python src\GUI\Nomina_GUI.py
-   ```
+## Descripción
+**Calculadora de Nómina** es una aplicación web diseñada para calcular el total a pagar de una empresa a sus empleados, considerando las deducciones legales y los valores devengados del salario. Esta herramienta facilita el manejo de nóminas en un entorno accesible, amigable y eficiente.
 
-## ¿Cómo está hecho?
-### Arquitectura del proyecto
-El proyecto está organizado en dos carpetas principales:
-- **src**: Contiene el código fuente de la aplicación.
-   - **Console**: Contiene el script `Console.py` para la interacción del usuario.
-   - **GUI**: Contiene el script principal `Nomina_GUI.py` que desde una interfaz amigable con el ususario puede interactuar con el programa.
-   - **Recursos**: Contiene una imagen que se usa como recurso para hacer la interfaz mas amigable `precaution.png` 
-   - **LiquidacionNomina**: Contiene la lógica para el cálculo de la nómina `Liquida_nomina.py` y las validaciones necesarias para asegurar que las variables cumplan los estándares `Validations.py`.
-  
-- **Test**: Contiene pruebas unitarias para validar la funcionalidad del código `Test_liquidacion.py`.
-### Organización del módulo
-- `src\GUI\Nomina_GUI.py`: Contiene el script principal, el cual recopila las entradas del usuario mediante una interfaz y muestra los resultados por medio de la misma.
-- `src\Console\Console.py`: Contiene el script para la interacción del usuario de manera plana. Recopilando las entradas del usuario y muestra los resultados.
-- `src\LiquidacionNomina\Liquida_nomina.py`: Contiene las funciones lógicas para el cálculo de la nomina, incluida la validación de las entradas y el cálculo del pago.
-### Dependencias
-- `unittest`: Librería estándar de Python para pruebas unitarias.
-- `kivy`: Librería de Python para el desarrollo de interfaces gráficas.
-## Uso
-Para ejecutar las pruebas unitarias desde la carpeta `test`, utilice el siguiente comando:
-```bash
-python Test/Test_liquidacion.py
-```
-Para ejecutar la interfaz gráfica amigable con el usuario y comprobar el funcionamiento, utilice el siguiente comando:
-```bash
-python src\GUI\Nomina_GUI.py
-```
-Para ejecutar la consola y probar el funcionamiento del programa, utilice el siguiente comando:
-```bash
-python src\Console\Console.py
-```
+## Autores
+- **Aplicación Web**: Samuel Gallego, Isabella Ceballos
+- **Base de Datos**: Felix Prada, Dilan Urrego
+- **Lógica de Cálculo**: Steven Oviedo, Valentina Morales
+
+## Funcionalidad
+La aplicación permite a las empresas calcular automáticamente el salario neto de sus empleados
+
+## Requisitos Previos
+Para configurar y ejecutar el proyecto, necesitas tener instalados los siguientes elementos:
+- **Python**: Para ejecutar el backend del cálculo de nómina.
+- **Flask**: Para la estructura y desarrollo de la aplicación web.
+- **Unittest**: Biblioteca para pruebas unitarias.
+- **Kivy**: (Opcional, si se usa para interfaces locales).
+Ademas debes tener una base de datos en Neon Tech
+-Para crearla debes ir a la pagina oficial de Neon Tech: https://neon.tech.
+a.	Debes iniciar sesión en su sitio web, o registrarte si no tinenes una cuenta creada.
+b.	Creas un nuevo proyecto.
+c.	Te diriges al apartado que dice "Dashboard".
+d.	En el apartado Database, selecciona la base de datos donde quieras guardar la base de datos y su información.
+e.	Haz click donde dice "ConnectionString", se desplegará un menú.
+f.	Selecciona la que dice "Parameters only".
+-¿Qué hacer con la información?.
+g.	Una vez la página te muestre los parámetros de la base de datos dírigete a la carpeta "src".
+h.	Encontraras al archivo "secret_config_esample".
+i.	Finalmente deberás seguir los pasos indicados en el archivo 'secret_config_esample.py' para continuar con el proceso de conexión con la base de datos.
+Asegúrate de tener un entorno virtual para evitar conflictos de dependencias y mantener el entorno limpio.
+## Instalación y Ejecución 
+### Clonar el repositorio ```bash git clone < https://github.com/samdg441/Calculadora-de-nomina_ws/tree/main/src > 
+### Instalar dependencias``` 
+- Modifica el archivo de configuración settings.py en el directorio del proyecto para ajustar la conexión a la base de datos.
+-Ejecuta las migraciones: 
+### Acceso a la aplicación``` Abre un navegador y navega a http://127.0.0.1:5000 para acceder a la interfaz.
+## Arquitectura del Proyecto
+El proyecto está organizado en varias carpetas para mantener una estructura modular y clara:
+-*calculadora_nómina*: Contiene los archivos de configuración del proyecto de Django.
+-src: Contiene la lógica de cálculo y validación de la nómina.
+-view-console: Define las vistas para manejar la interacción de los usuarios con la interfaz web.
+-model: Define los modelos de base de datos.
+-templates: Contiene los archivos HTML para la interfaz de usuario.
+-static: Archivos CSS, JS y otros recursos estáticos.
+-Test: Contiene pruebas unitarias para validar la funcionalidad de la lógica de cálculo y las vistas.
+
+
+
+
+
+
