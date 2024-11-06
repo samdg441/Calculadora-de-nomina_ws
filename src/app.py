@@ -26,6 +26,10 @@ def entrada_datos():
     return render_template('entrada_datos.html')
 
 # Ruta para procesar el cálculo de liquidación de nómina
+from flask import Flask, render_template, request
+from LiquidacionNomina.Liquida_nomina import Liquidacion
+from LiquidacionNomina import Validations  # Importa las excepciones específicas
+
 @app.route('/calcular_liquidacion', methods=['POST'])
 def calcular_liquidacion():
     # Obtener los datos del formulario
@@ -38,16 +42,35 @@ def calcular_liquidacion():
     leave_days = int(request.form.get('leave_days', 0))
     sick_days = int(request.form.get('sick_days', 0))
 
-    # Crear instancia de Liquidacion y calcular
-    liquidacion = Liquidacion(
-        monthly_salary, weeks_worked, time_worked_on_holidays,
-        overtime_day_hours, overtime_night_hours, overtime_holiday_hours,
-        leave_days, sick_days
-    )
-    total_settlement, detalles = liquidacion.CalcularLiquidacion()
+    try:
+        # Crear instancia de Liquidacion y calcular
+        liquidacion = Liquidacion(
+            monthly_salary, weeks_worked, time_worked_on_holidays,
+            overtime_day_hours, overtime_night_hours, overtime_holiday_hours,
+            leave_days, sick_days
+        )
+        total_settlement, detalles = liquidacion.CalcularLiquidacion()
 
-    # Pasar los resultados a la plantilla de resultados
-    return render_template('resultado.html', total=total_settlement, detalles=detalles)
+        # Pasar los resultados a la plantilla de resultados
+        return render_template('resultado.html', total=total_settlement, detalles=detalles)
+
+    except Validations.ZeroSalary as e:
+        error_message = str(e)
+        return render_template('resultado.html', error=error_message)
+
+    except Validations.ZeroWeeksWorked as e:
+        error_message = str(e)
+        return render_template('resultado.html', error=error_message)
+
+    except Validations.MoreThan8HoursWorkedOnHoliday as e:
+        error_message = str(e)
+        return render_template('resultado.html', error=error_message)
+
+    except Exception as e:
+        # Captura cualquier otro error inesperado y envía un mensaje genérico
+        error_message = "Ocurrió un error inesperado. Inténtelo de nuevo."
+        return render_template('resultado.html', error=error_message)
+
 # Ruta para mostrar datos
 @app.route('/mostrar')
 def mostrar():

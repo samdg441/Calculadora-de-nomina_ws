@@ -66,11 +66,29 @@
         a.button:hover {
             background-color: #2a3138;
         }
+        /* Mensaje de error */
+        .error-message {
+            color: #D8000C;
+            background-color: #FFBABA;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="result-container">
         <h2>Resultado de la Liquidación de Nómina</h2>
+
+        <!-- Mostrar mensaje de error si existe -->
+        {% if error %}
+        <div class="error-message">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- Mostrar tabla de resultados si no hay error -->
+        {% if not error %}
         <table>
             <thead>
                 <tr>
@@ -91,9 +109,10 @@
                 </tr>
             </tbody>
         </table>
+        {% endif %}
+
         <!-- Botón de regreso a la página principal -->
         <a href="{{ url_for('inicio') }}" class="button">Volver a la Página Principal</a>
     </div>
 </body>
 </html>
-
