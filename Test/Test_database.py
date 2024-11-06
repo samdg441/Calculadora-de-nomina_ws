@@ -4,9 +4,7 @@ import psycopg2
 sys.path.append("src")
 from unittest.mock import MagicMock, patch
 from model.Usuario import Usuario
-
 from controller.UserController import ControladorUsuarios
-
 
 class Test_datos(unittest.TestCase):
     def setUp(self):
@@ -15,8 +13,11 @@ class Test_datos(unittest.TestCase):
         self.mock_cursor = MagicMock()
         self.mock_connection = MagicMock()
         
-        # Mockear la obtención del cursor para que no acceda a la base de datos real
-        self.patcher_cursor = patch('controller.UserController.ControladorUsuarios.ObtenerCursor', return_value=self.mock_cursor)
+        # Mockear la obtención del cursor para que devuelva tanto el cursor como la conexión
+        self.patcher_cursor = patch(
+            'controller.UserController.ControladorUsuarios.ObtenerCursor',
+            return_value=(self.mock_cursor, self.mock_connection)
+        )
         self.mock_cursor_patch = self.patcher_cursor.start()
 
     def tearDown(self):
@@ -32,10 +33,11 @@ class Test_datos(unittest.TestCase):
     def test_eliminar_tabla(self):
         try:
             ControladorUsuarios.EliminarTabla()
-            self.mock_cursor.execute.assert_called_once_with("drop table usuarios")
-            self.mock_cursor.connection.commit.assert_called_once()
+            self.mock_cursor.execute.assert_called_once_with("DROP TABLE IF EXISTS usuarios;")
+            self.mock_connection.commit.assert_called_once()
         except Exception as e:
             self.fail(f"Error al eliminar la tabla: {str(e)}")
+
 
     def test_eliminar_tabla_error(self):
         self.mock_cursor.execute.side_effect = Exception("Error al eliminar tabla")

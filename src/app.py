@@ -91,6 +91,7 @@ def eliminar():
     return render_template('eliminar.html', mensaje=mensaje)
 
 # Ruta para buscar usuario por cédula
+# Ruta para buscar usuario por cédula
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar_usuario():
     usuario = None  # Inicializa el usuario como None
@@ -98,6 +99,7 @@ def buscar_usuario():
         cedula = request.form.get('cedula')
         usuario = ControladorUsuarios.BuscarUsuarioCedula(cedula)  # Busca el usuario por cédula
     return render_template('buscar.html', usuario=usuario)
+
 
 
 if __name__ == '__main__':
