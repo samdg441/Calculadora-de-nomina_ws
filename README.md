@@ -6,6 +6,10 @@
 **Autores de la base de datos**:
 - Felix Prada
 - Dilan Urrego
+**Autores de La Aplicación Web**:
+- Samuel Gallego
+- Isabella Ceballos
+  
 ## ¿Qué es y para qué es?
 Este proyecto es una aplicación que calcula el total a pagar de una empresa a un empleado (pago de nómina). Este pago corresponde a la diferencia entre los valores devengados y las deducciones de ley que aplican al salario del trabajador.
 ## ¿Cómo lo hago funcionar?
